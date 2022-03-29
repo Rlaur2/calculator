@@ -1,0 +1,19 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+body {
+    background-color: chocolate;
+    display: flex;
+    justify-content: center;
+}
+
+.main-container {
+    height: 70vh;
+    width: 60vh;
+    margin-top: 15vh;
+    background-color: burlywood;
+    border: 10px, blue, solid;
+}
