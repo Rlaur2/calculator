@@ -7,13 +7,99 @@
 body {
     background-color: chocolate;
     display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+
+.title-container {
+    display: flex;
     justify-content: center;
+    margin-top: 8vh;
 }
 
 .main-container {
     height: 70vh;
     width: 60vh;
-    margin-top: 15vh;
     background-color: burlywood;
-    border: 10px, blue, solid;
+    border: solid 5px blue;
+    margin-top: 5vh;
+}
+
+.mini-display {
+    background-color: beige;
+    height: 4vh;
+    border: 1px solid lightgray;
+    color: grey;
+    font-size: large;
+
+}
+
+.main-display {
+    background-color: beige;
+    height: 7vh;
+    border: 1px solid grey;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    font-size: 3.7rem;
+}
+
+.button-container {
+    display: flex;
+}
+
+.left-side {
+    display: flex;
+    outline: 1px solid red;
+    height: 50vh;
+    width: 40vh;
+    margin-top: 8vh;
+    justify-content: center;
+    flex-flow: wrap;
+}
+
+.operators {
+    display: flex;
+    outline: 1px solid red;
+    height: 50vh;
+    width: 20vh;
+    margin-top: 8vh;
+    flex-flow: wrap;
+}
+
+.clear-button {
+    height: 7vh;
+    width: 35vh;
+    outline: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.one-to-nine {
+    height: 38vh;
+    width: 38vh;
+    outline: 1px green solid;
+    display: flex;
+    flex-flow: wrap;
+    gap: 1vh;
+    align-items: center;
+}
+
+.one-to-nine div {
+    height: 5.5vh;
+    width: 12vh;
+    outline: 1px purple solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.operators div {
+    height: 6vh;
+    width: 15vh;
+    outline: 1px purple solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
