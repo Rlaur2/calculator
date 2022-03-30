@@ -20,19 +20,21 @@ body {
 .main-container {
     height: 70vh;
     width: 60vh;
-    background-color: burlywood;
-    border: solid 5px blue;
+    background-color: rgb(208, 224, 230);
+    border: solid 5px navy;
+    border-radius: 2%;
     margin-top: 5vh;
 }
 
 .mini-display {
     background-color: beige;
-    height: 4vh;
+    height: 3vh;
     border: 1px solid lightgray;
     color: grey;
     font-size: large;
     display: flex;
     justify-content: end;
+    align-items: center;
 
 }
 
@@ -46,6 +48,7 @@ body {
     font-size: 3.7rem;
     display: flex;
     justify-content: end;
+    align-items: center;
 }
 
 .button-container {
@@ -54,7 +57,6 @@ body {
 
 .left-side {
     display: flex;
-    outline: 1px solid red;
     height: 50vh;
     width: 40vh;
     margin-top: 8vh;
@@ -64,7 +66,6 @@ body {
 
 .operators {
     display: flex;
-    outline: 1px solid red;
     height: 50vh;
     width: 20vh;
     margin-top: 8vh;
@@ -75,16 +76,18 @@ body {
 .clear-button {
     height: 7vh;
     width: 35vh;
-    outline: 1px solid blue;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: skyblue;
+    outline: 2px solid darkgray;
+    border-radius: 1%;
+    font-size: 2.5rem;
 }
 
 .one-to-nine {
     height: 38vh;
     width: 38vh;
-    outline: 1px green solid;
     display: flex;
     flex-flow: wrap;
     gap: 1vh;
@@ -94,17 +97,37 @@ body {
 .one-to-nine div {
     height: 5.5vh;
     width: 12vh;
-    outline: 1px purple solid;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: skyblue;
+    outline: 2px solid darkgray;
+    border-radius: 1%;
+    font-size: 2.5rem;
 }
 
 .operators div {
     height: 6vh;
     width: 15vh;
-    outline: 1px purple solid;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: blue;
+    outline: 3px solid navy;
+    color: white;
+    border-radius: 2%;
+    font-size: larger;
+}
+
+#minus,#addition,#equal,#division {
+    font-size: 2.5rem;
+}
+
+#multiplication {
+    font-size: 2rem;
+}
+
+#equal {
+    background-color: green;
+    outline: 3px solid darkgreen;
 }
