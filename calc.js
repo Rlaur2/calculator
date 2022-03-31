@@ -145,8 +145,8 @@ function operation(e) {
         operatorPlug = '-';
     } if (this.id === 'addition') {
         operatorPlug = '+';
-    } //operators only push when array is empty 
-    if (equation.length === 0) {
+    } //operators only push when array is empty and the main display isn't
+    if (equation.length === 0 && mainDisplay.textContent != '') {
         equation.push(Number(operand));
     }
     //class to indicate number in display is not user-inputted anymore 
@@ -165,6 +165,11 @@ function operation(e) {
 //also clears and resets certain things
 let answer = ''
 const solution = () => {
+    //if statement that resets calculator if no operand present
+    if (equation.length === 0) {
+        reset();
+        return;
+    }
     equation.push(Number(operand));
     answer = operate(equation[0],operatorPlug,equation[1]);
     answer = Number(answer.toFixed(3));
