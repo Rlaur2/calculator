@@ -2,9 +2,9 @@
 Create a calculator with all the basic functions
 
 Bugs to fix and things to do
-1. Hitting an operator multiple times yields unexpected results, many bugs to count here - Fixed the major bugs!
+1. Hitting an operator multiple times yields unexpected results, many bugs to count here - Fixed the major bugs! Finding new bugs will require more testing.
 
-2. Clicking on 'equal' before having two operands also yields unexpected results. - Mostly fixed, gotta do some more testing
+2. Clicking on 'equal' before having two operands also yields unexpected results. - Fixed the major bugs! Finding new bugs will require more testing.
 
 3. Dividing by zero returns a string, clear out the string from the array when this happens - Fixed
 
