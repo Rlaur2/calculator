@@ -120,8 +120,17 @@ const back = () => {
     //after inputting a single number, operand class is removed
     mainDisplay.classList.remove('operand');
     mainDisplay.textContent = mainDisplay.textContent.slice(0,mainDisplay.textContent.length-1);
-    //saves new number displayed as the operand
-    operand = mainDisplay.textContent; 
+    //saves new number displayed as the operand unless the display is empty
+    if (mainDisplay.textContent.length > 0){
+        operand = mainDisplay.textContent; 
+    } else {
+        operand = '';
+    }
+    //if statement to catch lone negative symbols 
+    if (mainDisplay.textContent === '-') {
+        mainDisplay.textContent = '';
+        operand = '';
+    }
 }
 
 
@@ -169,7 +178,7 @@ const solution = () => {
     if (equation.length === 0) {
         reset();
         return;
-    }
+    } 
     equation.push(Number(operand));
     answer = operate(equation[0],operatorPlug,equation[1]);
     answer = Number(answer.toFixed(3));
