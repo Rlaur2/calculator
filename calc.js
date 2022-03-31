@@ -14,16 +14,27 @@ const multiply = (a,b) => {
 const divide = (a,b) => {
     if (b === 0) {
         let random = Math.floor(Math.random()*5)
+        //disables calculator until user clicks on clear
+        mainDisplay.classList.add('cant-work');
+        mainDisplay.classList.add('many-numbers');
+        disableButtons();
         if (random === 0) {
-            return 'Undefined';
+            mainDisplay.textContent = 'Undefined';
+            return;
         } if (random === 1) {
-            return 'I can\'t define that'
+            mainDisplay.textContent = 'I can\'t define that';
+            return;
         } if (random === 2) {
-            return 'No'
+            mainDisplay.textContent = 'No';
+            return;
         } if (random === 3) {
-            return 'I\'m afraid I can\'t do that, Dave'
+            //long string needs unique class to display properly
+            mainDisplay.classList.add('hal9000');
+            mainDisplay.textContent ='I\'m afraid I can\'t do that, Dave';
+            return;
         } if (random === 4) {
-            return 'Indéfini'
+            mainDisplay.textContent = 'Indéfini';
+            return;
         }    
     };
     return a / b;
@@ -65,6 +76,32 @@ function displayNumber(e) {
         mainDisplay.textContent = '';
         mainDisplay.classList.remove('operand');
     }
+    //code to make font-size normal after being reduced
+    mainDisplay.classList.remove('many-numbers');
+    //code to disable numbers when inputted length is too long
+    if (mainDisplay.textContent.length > 12) {
+        for (numberButton of numberButtons) {
+            numberButton.removeEventListener('click',displayNumber);
+        }
+    }
+    //keypad button's text is used fill out the main display
+    mainDisplay.textContent += this.textContent;
+    //updates the operand on every click
+    operand = mainDisplay.textContent;
+}
+
+//function to display the decimal and not allow mutliple decimals to be inputted
+const dot = () => {
+    if (mainDisplay.textContent.includes('.') && !mainDisplay.className.includes('operand')) {
+        return;
+    }//'operand' class distinguishes user-inputted numbers from numbers that were evaluated results
+    //after inputting a single number, operand class is removed
+    if (mainDisplay.className.includes('operand')) {
+        mainDisplay.textContent = '';
+        mainDisplay.classList.remove('operand');
+    }
+    //code to make font-size normal after being reduced
+    mainDisplay.classList.remove('many-numbers');
     //code to disable numbers when inputted length is too long
     if (mainDisplay.textContent.length > 12) {
         for (numberButton of numberButtons) {
@@ -72,14 +109,22 @@ function displayNumber(e) {
         }
     }
     //keypad's text is used fill out the main display
-    mainDisplay.textContent += this.textContent;
-    operand = mainDisplay.textContent;
+    mainDisplay.textContent += '.';
+    //updating operand when clicking on decimal not necessary as it doesn't change the actual number until
+    //another number is added after the decimal
 }
 
-//loop to add event listener to buttons 0-9
-for (numberButton of numberButtons){
-    numberButton.addEventListener('click',displayNumber);
+//function to delete last number
+const back = () => {
+     //'operand' class distinguishes user-inputted numbers from numbers that were evaluated results
+    //after inputting a single number, operand class is removed
+    mainDisplay.classList.remove('operand');
+    mainDisplay.textContent = mainDisplay.textContent.slice(0,mainDisplay.textContent.length-1);
+    //saves new number displayed as the operand
+    operand = mainDisplay.textContent; 
 }
+
+
 
 //code that controls the four operators
 let operatorPlug = ''
@@ -91,7 +136,7 @@ function operation(e) {
     } //else if to suppliment the above 
     else if (equation.length === 1 && operand != equation[0]) {
         solution();
-    } //code based of clicked button to decide which operator function to be used 
+    } //code based off clicked button to decide which operator function to be used 
     if (this.id === 'division') {
         operatorPlug = '/';       
     } if (this.id === 'multiplication') {
@@ -104,12 +149,16 @@ function operation(e) {
     if (equation.length === 0) {
         equation.push(Number(operand));
     }
-    //code to indicate number in display is not user-inputted anymore 
+    //class to indicate number in display is not user-inputted anymore 
     mainDisplay.classList.add('operand');
     //Code to re-enable keypad in case user inputted max length number
+    //unless a string is in the display
+    if (!mainDisplay.className.includes('cant-work')) {
     for (numberButton of numberButtons) {
         numberButton.addEventListener('click',displayNumber);
     }
+    dotButton.addEventListener('click',dot);
+}
 };
 
 //Code that uses current number in display to evaluate along with previously entered number
@@ -118,14 +167,26 @@ let answer = ''
 const solution = () => {
     equation.push(Number(operand));
     answer = operate(equation[0],operatorPlug,equation[1]);
+    answer = Number(answer.toFixed(3));
     equation = [];
     operatorPlug = '';
     operand = answer;
     mainDisplay.textContent = answer;
     mainDisplay.classList.add('operand');
+    //enables keypad if disabled earlier
     for (numberButton of numberButtons) {
         numberButton.addEventListener('click',displayNumber);
-    }
+    } 
+    dotButton.addEventListener('click',dot);
+    //displays E when number gets too large, must clear calculator
+    if (mainDisplay.textContent.length > 21) {
+        mainDisplay.textContent = 'E';
+        mainDisplay.classList.add('cant-work');
+        disableButtons();
+    } //reduces font-size when number gets too large
+    if (mainDisplay.textContent.length > 14) {
+        mainDisplay.classList.add('many-numbers');
+    } 
 }
 
 //function to clear out the calculator of all info
@@ -135,11 +196,44 @@ const reset = () => {
     operatorPlug = '';
     operand = '';
     mainDisplay.classList.remove('operand');
+    mainDisplay.classList.remove('cant-work');
+    mainDisplay.classList.remove('hal9000');
+    enableButtons();
+};
+
+const enableButtons = () => {
+    divideButton.addEventListener('click',operation);
+    multiplyButton.addEventListener('click',operation);
+    minusButton.addEventListener('click',operation);
+    additionButton.addEventListener('click',operation);
+    equalButton.addEventListener('click',solution);
     for (numberButton of numberButtons){
         numberButton.addEventListener('click',displayNumber);
     };
-};
+    dotButton.addEventListener('click',dot);
+    backSpace.addEventListener('click',back);
+}
 
+const disableButtons = () => {
+    divideButton.removeEventListener('click',operation);
+    multiplyButton.removeEventListener('click',operation);
+    minusButton.removeEventListener('click',operation);
+    additionButton.removeEventListener('click',operation);
+    equalButton.removeEventListener('click',solution);
+    for (numberButton of numberButtons){
+        numberButton.removeEventListener('click',displayNumber);
+    };
+    dotButton.removeEventListener('click',dot);
+    backSpace.removeEventListener('click',back);
+}
+
+
+//loop to add event listener to buttons 0-9
+for (numberButton of numberButtons){
+    numberButton.addEventListener('click',displayNumber);
+}//the rest of the event listeners down here
+dotButton.addEventListener('click',dot);
+backSpace.addEventListener('click',back);
 divideButton.addEventListener('click',operation);
 multiplyButton.addEventListener('click',operation);
 minusButton.addEventListener('click',operation);
