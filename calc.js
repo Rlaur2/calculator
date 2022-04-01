@@ -90,6 +90,8 @@ function displayNumber(e) {
     operand = mainDisplay.textContent;
 }
 
+
+
 //function to display the decimal and not allow mutliple decimals to be inputted
 const dot = () => {
     if (mainDisplay.textContent.includes('.') && !mainDisplay.className.includes('operand')) {
@@ -224,6 +226,38 @@ const solution = () => {
     } 
 }
 
+//function to add keyboard support
+const keyPress = (e) => {
+    if(e.key === '.') {
+        dot();
+    } if (e.key ==='Enter' || e.key === '=') {
+        solution();
+    } if (e.key === 'Backspace') {
+        back();
+    } if (e.key === '/') {
+        this.id = 'division';
+        operation();
+    } if (e.key === '*') {
+        this.id = 'multiplication';
+        operation();
+    } if (e.key === '-') {
+        this.id = 'minus';
+        operation();
+    } if (e.key === '+') {
+        this.id = 'addition';
+        operation();
+    } if (e.key === '0' || e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4' ||
+        e.key === '5' || e.key === '6' || e.key === '7' || e.key === '8' || e.key === '9') {
+            if (mainDisplay.className.includes('operand')) {
+                mainDisplay.textContent = '';
+                mainDisplay.classList.remove('operand');
+            }
+            if (mainDisplay.textContent.length < 14) {
+            numberPress(e.key);
+        }
+    } 
+};
+
 //function to clear out the calculator of all info
 const reset = () => {
     equation = [];
@@ -253,6 +287,7 @@ const enableButtons = () => {
     };
     dotButton.addEventListener('click',dot);
     backSpace.addEventListener('click',back);
+    document.addEventListener('keydown', keyPress);
 }
 
 const disableButtons = () => {
@@ -266,6 +301,7 @@ const disableButtons = () => {
     };
     dotButton.removeEventListener('click',dot);
     backSpace.removeEventListener('click',back);
+    document.removeEventListener('keydown',keyPress);
     miniDisplay.textContent = 'MUST CLEAR';
 }
 
@@ -300,35 +336,13 @@ additionButton.addEventListener('click',operation);
 equalButton.addEventListener('click',solution);
 clearButton.addEventListener('click',reset);
 
-//event listeners for keydown presses
-document.addEventListener('keydown',(e) => {
-    if(e.key === '.') {
-        dot();
-    } if (e.key ==='Enter' || e.key === '=') {
-        solution();
-    } if (e.key === 'Backspace') {
-        back();
-    } if (e.key === 'Escape') {
+//event listener for keydown presses
+document.addEventListener('keydown',keyPress);
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
         reset();
-    } if (e.key === '/') {
-        this.id = 'division';
-        operation();
-    } if (e.key === '*') {
-        this.id = 'multiplication';
-        operation();
-    } if (e.key === '-') {
-        this.id = 'minus';
-        operation();
-    } if (e.key === '+') {
-        this.id = 'addition';
-        operation();
-    } if (e.key === '0' || e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4' ||
-    e.key === '5' || e.key === '6' || e.key === '7' || e.key === '8' || e.key === '9') {
-        numberPress(e.key);
-    }
-})
-
-//function specifically for keyboard presses
+}});
+//function specifically for numbers on the keyboard
 const numberPress = (number) => {
     //'operand' class distinguishes user-inputted numbers from numbers that were evaluated results
     //after inputting a single number, operand class is removed
@@ -342,7 +356,7 @@ const numberPress = (number) => {
     if (mainDisplay.textContent.length > 12) {
         for (numberButton of numberButtons) {
             numberButton.removeEventListener('click',displayNumber);
-        }
+        } 
     }
     mainDisplay.textContent += number;
     //updates the operand on every click
