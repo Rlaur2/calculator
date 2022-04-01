@@ -147,18 +147,38 @@ function operation(e) {
         solution();
     } //code based off clicked button to decide which operator function to be used 
     if (this.id === 'division') {
-        operatorPlug = '/';       
+        operatorPlug = '/';
+        //CSS rules to keep hover color for active operator
+        //currently disabled
+        /*divideButton.classList.add('clicked-on');
+        multiplyButton.classList.remove('clicked-on');
+        minusButton.classList.remove('clicked-on');
+        additionButton.classList.remove('clicked-on');*/ 
     } if (this.id === 'multiplication') {
         operatorPlug = '*';
+        /*multiplyButton.classList.add('clicked-on');
+        divideButton.classList.remove('clicked-on');
+        minusButton.classList.remove('clicked-on');
+        additionButton.classList.remove('clicked-on');*/
     } if (this.id === 'minus') {
         operatorPlug = '-';
+        /*minusButton.classList.add('clicked-on');
+        multiplyButton.classList.remove('clicked-on');
+        divideButton.classList.remove('clicked-on');
+        additionButton.classList.remove('clicked-on');*/
     } if (this.id === 'addition') {
         operatorPlug = '+';
-    } //operators only push when array is empty and the main display isn't
+        /*additionButton.classList.add('clicked-on');
+        minusButton.classList.remove('clicked-on');
+        multiplyButton.classList.remove('clicked-on');
+        divideButton.classList.remove('clicked-on');*/
+    } if (equation.length > 0) {
+        updateDisplay();
+    } //operators only push when array is empty and the main display isn't empty
     if (equation.length === 0 && mainDisplay.textContent != '') {
         equation.push(Number(operand));
-    }
-    //class to indicate number in display is not user-inputted anymore 
+        updateDisplay();
+    } //class to indicate number in display is not user-inputted anymore 
     mainDisplay.classList.add('operand');
     //Code to re-enable keypad in case user inputted max length number
     //unless a string is in the display
@@ -180,6 +200,7 @@ const solution = () => {
         return;
     } 
     equation.push(Number(operand));
+    updateDisplay();
     answer = operate(equation[0],operatorPlug,equation[1]);
     answer = Number(answer.toFixed(3));
     equation = [];
@@ -213,6 +234,12 @@ const reset = () => {
     mainDisplay.classList.remove('cant-work');
     mainDisplay.classList.remove('hal9000');
     enableButtons();
+    miniDisplay.textContent = '';
+    additionButton.classList.remove('clicked-on');
+    minusButton.classList.remove('clicked-on');
+    multiplyButton.classList.remove('clicked-on');
+    divideButton.classList.remove('clicked-on');
+
 };
 
 const enableButtons = () => {
@@ -239,6 +266,24 @@ const disableButtons = () => {
     };
     dotButton.removeEventListener('click',dot);
     backSpace.removeEventListener('click',back);
+    miniDisplay.textContent = 'MUST CLEAR';
+}
+
+//code to display the current equation in the mini display
+const updateDisplay = () => {
+    let symbol = '';
+    if (operatorPlug === '/') {
+        symbol = '÷';
+    } else if (operatorPlug === '*') {
+        symbol = 'x';
+    } else {
+        symbol = operatorPlug;
+    } 
+    if (equation[1] === undefined) {
+        miniDisplay.textContent = `${equation[0]} ${symbol}`;
+    } else {
+        miniDisplay.textContent = `${equation[0]} ${symbol} ${equation[1]}`;
+    };
 }
 
 
