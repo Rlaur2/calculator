@@ -1,21 +1,11 @@
 # calculator
 Create a calculator with all the basic functions
 
-Bugs to fix and things to do
-1. Hitting an operator multiple times yields unexpected results, many bugs to count here - Fixed the major bugs! Finding new bugs will require more testing.
+I've completed the calculator project. Fixing all of the bugs with clicking an operator multiple times and making sure it functions properly was easily the hardest part about this project. I was able to complete the whole thing without looking anything up other than the key names for the keyboard buttons which seems to be extremely straight forward.
 
-2. Clicking on 'equal' before having two operands also yields unexpected results. - Fixed the major bugs! Finding new bugs will require more testing.
+- Future additions
+If I ever revisit this project there are a few things I'll add. 
 
-3. Dividing by zero returns a string, clear out the string from the array when this happens - Fixed
+A button to change the current operand to it's negative version and vice-versa. 
 
-3. Add functionality to 'clear', '.', and 'BACK' buttons - All added
-
-4. Add functionality to mini-display up top - done
-
-5. Make whole thing look a little nicer at the end, like hover buttons and animations when a button gets clicked - Done, more can be added however at a later time
-
-6. Add limit to number size when received as answer, also fix the decimal point to the hundredth, maybe thousandth, place when received as answer - Done
-
-7. Add keyboard support
-
-8. There is no functionality to create negative numbers. Might add this in the future but not atm.
+Probably completely re-do the CSS, I need to learn shadows and animations in order for my projects to not be mistaken for MS Paint images. 
