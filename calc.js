@@ -290,7 +290,7 @@ const updateDisplay = () => {
 //loop to add event listener to buttons 0-9
 for (numberButton of numberButtons){
     numberButton.addEventListener('click',displayNumber);
-}//the rest of the event listeners down here
+}//event listeners for clicking
 dotButton.addEventListener('click',dot);
 backSpace.addEventListener('click',back);
 divideButton.addEventListener('click',operation);
@@ -299,3 +299,52 @@ minusButton.addEventListener('click',operation);
 additionButton.addEventListener('click',operation);
 equalButton.addEventListener('click',solution);
 clearButton.addEventListener('click',reset);
+
+//event listeners for keydown presses
+document.addEventListener('keydown',(e) => {
+    if(e.key === '.') {
+        dot();
+    } if (e.key ==='Enter' || e.key === '=') {
+        solution();
+    } if (e.key === 'Backspace') {
+        back();
+    } if (e.key === 'Escape') {
+        reset();
+    } if (e.key === '/') {
+        this.id = 'division';
+        operation();
+    } if (e.key === '*') {
+        this.id = 'multiplication';
+        operation();
+    } if (e.key === '-') {
+        this.id = 'minus';
+        operation();
+    } if (e.key === '+') {
+        this.id = 'addition';
+        operation();
+    } if (e.key === '0' || e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4' ||
+    e.key === '5' || e.key === '6' || e.key === '7' || e.key === '8' || e.key === '9') {
+        numberPress(e.key);
+    }
+})
+
+//function specifically for keyboard presses
+const numberPress = (number) => {
+    //'operand' class distinguishes user-inputted numbers from numbers that were evaluated results
+    //after inputting a single number, operand class is removed
+    if (mainDisplay.className.includes('operand')) {
+        mainDisplay.textContent = '';
+        mainDisplay.classList.remove('operand');
+    }
+    //code to make font-size normal after being reduced
+    mainDisplay.classList.remove('many-numbers');
+    //code to disable numbers when inputted length is too long
+    if (mainDisplay.textContent.length > 12) {
+        for (numberButton of numberButtons) {
+            numberButton.removeEventListener('click',displayNumber);
+        }
+    }
+    mainDisplay.textContent += number;
+    //updates the operand on every click
+    operand = mainDisplay.textContent;
+}
