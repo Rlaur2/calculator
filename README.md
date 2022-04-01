@@ -10,10 +10,12 @@ Bugs to fix and things to do
 
 3. Add functionality to 'clear', '.', and 'BACK' buttons - All added
 
-4. Add functionality to mini-display up top
+4. Add functionality to mini-display up top - done
 
-5. Make whole thing look a little nicer at the end, like hover buttons and animations when a button gets clicked
+5. Make whole thing look a little nicer at the end, like hover buttons and animations when a button gets clicked - Done, more can be added however at a later time
 
 6. Add limit to number size when received as answer, also fix the decimal point to the hundredth, maybe thousandth, place when received as answer - Done
 
 7. Add keyboard support
+
+8. There is no functionality to create negative numbers. Might add this in the future but not atm.
