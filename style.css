@@ -106,6 +106,12 @@ body {
     font-size: 2.5rem;
 }
 
+.one-to-nine div:hover, .clear-button:hover{
+    background-color: darkgray;
+    outline: 2px solid skyblue;
+    /* look up how to change mouse pointer during hover */
+}
+
 .operators div {
     height: 6vh;
     width: 15vh;
@@ -119,6 +125,13 @@ body {
     font-size: larger;
 }
 
+.operators div:hover, .operators .clicked-on {
+    background-color: brown;
+    outline: 3px solid black;
+}
+
+
+
 #minus,#addition,#equal,#division {
     font-size: 2.5rem;
 }
@@ -130,6 +143,11 @@ body {
 #equal {
     background-color: green;
     outline: 3px solid darkgreen;
+}
+
+#equal:hover {
+    background-color: red;
+    outline: black 3px solid;
 }
 
 .many-numbers {
